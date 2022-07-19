@@ -1,0 +1,537 @@
+@charset "UTF-8";
+/*Обнуление*/
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*--------------------*/
+body {
+  background-color: #82dc55;
+}
+
+.score {
+  position: fixed;
+  top: 40px;
+  left: 150px;
+  z-index: 15;
+}
+.score p {
+  font-size: 30px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+.life {
+  position: fixed;
+  top: 80px;
+  left: 70px;
+  height: 35px;
+  width: 300px;
+  background: #e63c3c;
+  z-index: 15;
+}
+.life p {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  height: 100%;
+  width: 100%;
+  background: #6eeb6e;
+  -webkit-box-shadow: 0 0 20px 4px #2fd32f inset;
+          box-shadow: 0 0 20px 4px #2fd32f inset;
+}
+.life span {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  -webkit-transition: 0.7s;
+  transition: 0.7s;
+  height: 100%;
+  width: 100%;
+  background: #e2df14;
+}
+
+.mapContainer {
+  z-index: 15;
+  border-radius: 25%;
+  overflow: hidden;
+  border: 2px solid gray;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  height: 150px;
+  width: 150px;
+  background: rgba(0, 170, 0, 0.7);
+}
+.mapContainer .map {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: relative;
+}
+.mapContainer .map .soldierPoint, .mapContainer .map .bumblebeePoint, .mapContainer .map .greenBeetlePoint, .mapContainer .map .waspPoint, .mapContainer .map .antPoint {
+  position: absolute;
+  height: 6px;
+  width: 6px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.mapContainer.close {
+  opacity: 0.4;
+}
+
+.large_map {
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  overflow: hidden;
+  z-index: 5;
+  background: #00aa00;
+  border: 2px solid gray;
+}
+.large_map .soldierPoint, .large_map .bumblebeePoint, .large_map .greenBeetlePoint, .large_map .waspPoint, .large_map .antPoint {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.large_map .antPoint {
+  z-index: 5;
+  background-color: red;
+}
+.large_map .antPoint::after {
+  content: "";
+  height: 150px;
+  width: 150px;
+  display: block;
+  border-radius: 25%;
+  -webkit-transform: translate(-71px, -71px);
+          transform: translate(-71px, -71px);
+  border: 2px solid #00be00;
+}
+.large_map.show {
+  display: block;
+}
+
+.antPoint {
+  background-color: red;
+}
+
+.waspPoint {
+  background: black;
+  border: 2px solid yellow;
+}
+
+.greenBeetlePoint {
+  background-color: #48ff48;
+  border: 1px solid blue;
+}
+
+.bumblebeePoint {
+  border-radius: 50%;
+  background-color: yellow;
+}
+
+.soldierPoint {
+  background-color: red;
+  border: 2px solid black;
+}
+
+.bumblebeeSoil {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  background: url(../img/soil-bumblebee.png) 100%/contain no-repeat;
+}
+
+.grass {
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  background: url(../img/grass.png) 100%/contain no-repeat;
+}
+.grass.grass-1 {
+  top: 300px;
+  left: 60px;
+}
+.grass.grass-2 {
+  top: 200px;
+  left: 600px;
+}
+.grass.grass-3 {
+  bottom: 50px;
+  right: 80px;
+}
+
+.flower {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background: url(../svg/flower.svg) 100%/contain no-repeat;
+}
+
+.flower-1 {
+  z-index: 10;
+  top: 1200px;
+  left: 1600px;
+}
+
+.stone {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background: url(../svg/stones.svg) 100%/contain no-repeat;
+}
+
+.stone-1 {
+  bottom: 25px;
+  right: 50px;
+}
+
+/*--------------------*/
+.container {
+  overflow: hidden;
+  position: absolute;
+  background: url(../img/backgroundFlowers.jpg);
+  height: 4000px;
+  width: 4000px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+.container .tallGrass {
+  position: absolute;
+  top: -100px;
+  left: 3000px;
+  height: 1400px;
+  width: 1400px;
+  background: url(../img/tallGrassBackground.jpg);
+  border-radius: 53% 47% 55% 45%/67% 30% 70% 33%;
+}
+.container .log {
+  z-index: 5;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: absolute;
+  height: 1000px;
+  width: 2000px;
+  background: url(../img/log.png) 100%/contain no-repeat;
+}
+.container .leaf {
+  z-index: 5;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: absolute;
+  height: 1000px;
+  width: 800px;
+  border-radius: 40%;
+  background: url(../img/leaf2.png) 100%/contain no-repeat;
+}
+.container .ant {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.container .ant .ant-toLeft, .container .ant .ant-toRight {
+  display: none;
+  height: 100%;
+  width: 100%;
+  background-image: url(../svg/ant.svg);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.container .ant .ant-top {
+  background-image: url(../svg/ant.svg);
+  height: 100%;
+  width: 100%;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.container .ant .ant-toRight {
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-animation: animeAnt-toRight 0.3s linear 1 normal 0s forwards;
+          animation: animeAnt-toRight 0.3s linear 1 normal 0s forwards;
+}
+@-webkit-keyframes animeAnt-toRight {
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes animeAnt-toRight {
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+.container .ant .ant-toLeft {
+  -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+  -webkit-animation: animeAnt-toLeft 0.3s linear 1 normal 0s forwards;
+          animation: animeAnt-toLeft 0.3s linear 1 normal 0s forwards;
+}
+@-webkit-keyframes animeAnt-toLeft {
+  to {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
+@keyframes animeAnt-toLeft {
+  to {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
+.container .insect {
+  z-index: 1;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+}
+.container .insect .insect-to225deg, .container .insect .insect-to270deg, .container .insect .insect-to315deg, .container .insect .insect-toRight, .container .insect .insect-top {
+  position: relative;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  background-size: contain;
+}
+.container .insect .insect-toRight {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+  -webkit-animation: anime 0.3s linear 1 normal 0s forwards;
+          animation: anime 0.3s linear 1 normal 0s forwards;
+  display: none;
+}
+@-webkit-keyframes anime {
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes anime {
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+.container .insect .insect-to315deg {
+  -webkit-animation: to315deg 0.3s linear 1 normal 0s forwards;
+          animation: to315deg 0.3s linear 1 normal 0s forwards;
+  display: none;
+}
+@-webkit-keyframes to315deg {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+  }
+}
+@keyframes to315deg {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+  }
+}
+.container .insect .insect-to270deg {
+  -webkit-animation: to270deg 0.3s linear 1 normal 0s forwards;
+          animation: to270deg 0.3s linear 1 normal 0s forwards;
+  display: none;
+}
+@-webkit-keyframes to270deg {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
+@keyframes to270deg {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-90deg);
+            transform: rotate(-90deg);
+  }
+}
+.container .insect .insect-to225deg {
+  -webkit-animation: to225deg 0.3s linear 1 normal 0s forwards;
+          animation: to225deg 0.3s linear 1 normal 0s forwards;
+  display: none;
+}
+@-webkit-keyframes to225deg {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+  }
+}
+@keyframes to225deg {
+  from {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+  }
+}
+.container .wasp div {
+  height: 70px;
+  width: 70px;
+  left: -40%;
+  top: -40%;
+  background-size: contain;
+  background-image: url(../svg/wasp.svg);
+}
+.container .greenBeetle {
+  border-radius: 50%;
+  -webkit-box-shadow: 0 0 25px 1px rgba(0, 0, 0, 0.7), 0 0 10px 1px rgba(0, 0, 0, 0.5) inset;
+          box-shadow: 0 0 25px 1px rgba(0, 0, 0, 0.7), 0 0 10px 1px rgba(0, 0, 0, 0.5) inset;
+}
+.container .greenBeetle div {
+  height: 90px;
+  width: 90px;
+  left: -62%;
+  top: -62%;
+  background-image: url(../svg/greenBeetle.svg);
+}
+.container .bumblebee div {
+  height: 100px;
+  width: 100px;
+  left: -72%;
+  top: -72%;
+  background-image: url(../svg/bumblebee.svg);
+}
+.container .soldier div {
+  height: 80px;
+  width: 80px;
+  left: -52%;
+  top: -52%;
+  background-image: url(../svg/soldier.svg);
+}
+.container .food {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  background-size: contain;
+}
+.container .apple {
+  background-image: url(../svg/apple.svg);
+}
+.container .pear {
+  background-image: url(../svg/pear.svg);
+}
+.container .cabbage {
+  background-image: url(../svg/cabbage.svg);
+}
+.container .carrot {
+  background-image: url(../svg/carrot.svg);
+}
+.container .rotate0deg {
+  -webkit-transition: none;
+  transition: none;
+}

@@ -1,0 +1,555 @@
+/*Обнуление*/
+
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+*,
+*:before,
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+:focus,
+:active {
+  outline: none;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+nav,
+footer,
+header,
+aside {
+  display: block;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  line-height: 1;
+  font-size: 14px;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  overflow: hidden;
+}
+
+input,
+button,
+textarea {
+  font-family: inherit;
+}
+
+input::-ms-clear {
+  display: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+ul li {
+  list-style: none;
+}
+
+img {
+  vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/*--------------------*/
+
+$tns: 0.3s; // transition
+
+body {
+  background-color: rgb(130, 220, 85);
+}
+
+.score {
+  position: fixed;
+  top: 40px;
+  left: 150px;
+  z-index: 15;
+  p {
+    font-size: 30px;
+    text-transform: uppercase;
+    font-family: sans-serif;
+  }
+}
+
+.life {
+  position: fixed;
+  top: 80px;
+  left: 70px;
+  height: 35px;
+  width: 300px;
+  background: rgb(230, 60, 60);
+  z-index: 15;
+  & p {
+    transition: 0.5s;
+    height: 100%;
+    width: 100%;
+    background: rgb(110, 235, 110);
+    box-shadow: 0 0 20px 4px rgb(47, 211, 47) inset;
+  }
+  & span {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    transition: 0.7s;
+    height: 100%;
+    width: 100%;
+    background: rgb(226, 223, 20);
+  }
+}
+
+.mapContainer {
+  z-index: 15;
+  border-radius: 25%;
+  overflow: hidden;
+  border: 2px solid gray;
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  height: 150px;
+  width: 150px;
+  background: rgba(0, 170, 0, 0.7);
+  // & .point {
+  //   position: absolute;
+  //   top: 70px;
+  //   left: 70px;
+  //   background-color: red;
+  //   height: 6px;
+  //   width: 6px;
+  // }
+  & .map {
+    transition: $tns;
+    position: relative;
+    %point {
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      transition: $tns;
+    }
+  }
+  &.close {
+    opacity: 0.4;
+  }
+}
+
+.large_map {
+  display: none;
+  position: fixed;
+  top: 50px;
+  right: 50px;
+  overflow: hidden;
+  z-index: 5;
+  background: rgba(0, 170, 0);
+  border: 2px solid gray;
+  %point {
+    position: absolute;
+    height: 8px;
+    width: 8px;
+    transition: $tns;
+  }
+  & .antPoint {
+    z-index: 5;
+    @extend %point;
+    background-color: red;
+    // border-radius: 50%;
+    &::after {
+      content: "";
+      height: 150px;
+      width: 150px;
+      display: block;
+      border-radius: 25%;
+      transform: translate(-71px, -71px);
+      border: 2px solid rgba(0, 190, 0);
+    }
+  }
+  &.show {
+    display: block;
+  }
+}
+
+// map points
+.antPoint {
+  @extend %point;
+  background-color: red;
+  // border-radius: 50%;
+}
+.waspPoint {
+  @extend %point;
+  background: black;
+  border: 2px solid yellow;
+}
+.greenBeetlePoint {
+  @extend %point;
+  background-color: rgb(72, 255, 72);
+  border: 1px solid blue;
+}
+.bumblebeePoint {
+  @extend %point;
+  border-radius: 50%;
+  background-color: yellow;
+}
+.soldierPoint {
+  @extend %point;
+  background-color: rgb(255, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
+}
+
+// decoration
+.bumblebeeSoil {
+  height: 200px;
+  width: 200px;
+  position: absolute;
+  background: url(../img/soil-bumblebee.png) 100% / contain no-repeat;
+}
+
+.grass {
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  background: url(../img/grass.png) 100% / contain no-repeat;
+
+  &.grass-1 {
+    top: 300px;
+    left: 60px;
+  }
+  &.grass-2 {
+    top: 200px;
+    left: 600px;
+  }
+  &.grass-3 {
+    bottom: 50px;
+    right: 80px;
+  }
+}
+.flower {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background: url(../svg/flower.svg) 100% / contain no-repeat;
+}
+.flower-1 {
+  z-index: 10;
+  top: 1200px;
+  left: 1600px;
+}
+
+.stone {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  background: url(../svg/stones.svg) 100% / contain no-repeat;
+}
+.stone-1 {
+  bottom: 25px;
+  right: 50px;
+}
+
+/*--------------------*/
+
+// container
+
+$height: 4000px;
+$width: 4000px;
+.container {
+  overflow: hidden;
+  position: absolute;
+  background: url(../img/backgroundFlowers.jpg);
+  // height: 840px;
+  // width: 1520px;
+  height: $height;
+  width: $width;
+  transition: 0.5s;
+
+  // bioms
+  & .tallGrass {
+    position: absolute;
+    top: -100px;
+    left: 3000px;
+    height: 1400px;
+    width: 1400px;
+    background: url(../img/tallGrassBackground.jpg);
+    border-radius: 53% 47% 55% 45% / 67% 30% 70% 33%;
+  }
+
+  // nature
+
+  & .log {
+    z-index: 5;
+    transition: $tns;
+    position: absolute;
+    height: 1000px;
+    width: 2000px;
+    background: url(../img/log.png) 100% / contain no-repeat;
+  }
+
+  & .leaf {
+    z-index: 5;
+    transition: $tns;
+    position: absolute;
+    height: 1000px;
+    width: 800px;
+    border-radius: 40%;
+    background: url(../img/leaf2.png) 100% / contain no-repeat;
+  }
+
+  // ant
+  & .ant {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    transition: $tns;
+    %antPseudoElements {
+      display: none;
+      height: 100%;
+      width: 100%;
+      background-image: url(../svg/ant.svg);
+      transition: $tns;
+    }
+    & .ant-top {
+      background-image: url(../svg/ant.svg);
+      height: 100%;
+      width: 100%;
+      transition: $tns;
+    }
+    & .ant-toRight {
+      transform: rotate(-90deg);
+      @keyframes animeAnt-toRight {
+        to {
+          transform: rotate(0deg);
+        }
+      }
+      animation: animeAnt-toRight $tns linear 1 normal 0s forwards;
+      @extend %antPseudoElements;
+    }
+    & .ant-toLeft {
+      transform: rotate(0deg);
+      @keyframes animeAnt-toLeft {
+        to {
+          transform: rotate(-90deg);
+        }
+      }
+      animation: animeAnt-toLeft $tns linear 1 normal 0s forwards;
+      @extend %antPseudoElements;
+    }
+  }
+
+  // insects
+
+  .insect {
+    z-index: 1;
+    transition: $tns;
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    // &::after {
+    //   content: "";
+    //   display: block;
+    //   background-size: contain;
+    //   position: relative;
+    //   left: 50%;
+    //   transform: translate(-50%, 0);
+    // }
+
+    %insectPseudoElements {
+      position: relative;
+      transition: $tns;
+      background-size: contain;
+    }
+    & .insect-top {
+      @extend %insectPseudoElements;
+
+      // transform: rotate(0deg) translate(-50%, 0);
+    }
+    & .insect-toRight {
+      @extend %insectPseudoElements;
+      transform: rotate(-45deg);
+      animation: anime $tns linear 1 normal 0s forwards;
+      display: none;
+      @keyframes anime {
+        to {
+          transform: rotate(0deg);
+        }
+      }
+    }
+    & .insect-to315deg {
+      @extend %insectPseudoElements;
+      animation: to315deg $tns linear 1 normal 0s forwards;
+      display: none;
+      @keyframes to315deg {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-45deg);
+        }
+      }
+    }
+    & .insect-to270deg {
+      @extend %insectPseudoElements;
+      animation: to270deg $tns linear 1 normal 0s forwards;
+      display: none;
+      @keyframes to270deg {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-90deg);
+        }
+      }
+    }
+    & .insect-to225deg {
+      @extend %insectPseudoElements;
+      animation: to225deg $tns linear 1 normal 0s forwards;
+      display: none;
+      @keyframes to225deg {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(-135deg);
+        }
+      }
+    }
+  }
+  & .wasp {
+    & div {
+      height: 70px;
+      width: 70px;
+      left: -40%;
+      top: -40%;
+      background-size: contain;
+      background-image: url(../svg/wasp.svg);
+    }
+  }
+  & .greenBeetle {
+    border-radius: 50%;
+    box-shadow: 0 0 25px 1px rgba(0, 0, 0, 0.7),
+      0 0 10px 1px rgba(0, 0, 0, 0.5) inset;
+    & div {
+      height: 90px;
+      width: 90px;
+      left: -62%;
+      top: -62%;
+      background-image: url(../svg/greenBeetle.svg);
+    }
+  }
+  & .bumblebee {
+    & div {
+      height: 100px;
+      width: 100px;
+      left: -72%;
+      top: -72%;
+      background-image: url(../svg/bumblebee.svg);
+    }
+  }
+  & .soldier {
+    // background: red;
+    & div {
+      height: 80px;
+      width: 80px;
+      left: -52%;
+      top: -52%;
+      background-image: url(../svg/soldier.svg);
+      // background: green;
+      // opacity: 0.8;
+    }
+  }
+
+  // & .beetle {
+  //   & div {
+  //     height: 120px;
+  //     width: 120px;
+  //     left: -100%;
+  //     top: -100%;
+  //     background-image: url(../svg/beetle.svg);
+  //   }
+  // }
+  // & .tarantula {
+  //   &::after {
+  //     height: 80px;
+  //     width: 80px;
+  //     background-image: url(../svg/tarantula.svg);
+  //   }
+  // }
+  // &.scorpion {
+  //   &::after {
+  //     height: 90px;
+  //     width: 90px;
+  //     background-image: url(../svg/scorpion.svg);
+  //   }
+  // }
+  // & .termite {
+  //   &::after {
+  //     height: 40px;
+  //     width: 40px;
+  //     background-image: url(../svg/termite.svg);
+  //   }
+  // }
+
+  // foods
+
+  & .food {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    background-size: contain;
+  }
+  & .apple {
+    background-image: url(../svg/apple.svg);
+  }
+  & .pear {
+    background-image: url(../svg/pear.svg);
+  }
+  & .cabbage {
+    background-image: url(../svg/cabbage.svg);
+  }
+  & .carrot {
+    background-image: url(../svg/carrot.svg);
+  }
+
+  // rotate
+
+  & .rotate0deg {
+    transition: none;
+  }
+}
