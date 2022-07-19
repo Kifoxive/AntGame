@@ -6,6 +6,10 @@
   border: 0;
 }
 
+:root {
+  font-size: 62.5%;
+}
+
 *,
 *:before,
 *:after {
@@ -91,7 +95,7 @@ h6 {
 
 /*--------------------*/
 body {
-  background-color: #82dc55;
+  background-color: rgb(130, 220, 85);
 }
 
 .score {
@@ -100,31 +104,43 @@ body {
   left: 150px;
   z-index: 15;
 }
+.score.__mobile {
+  top: 20px;
+  left: 130px;
+}
+.score.__mobile p {
+  font-size: 20px;
+}
 .score p {
   font-size: 30px;
   text-transform: uppercase;
   font-family: sans-serif;
 }
 
-.life {
+.lifePoints {
   position: fixed;
   top: 80px;
   left: 70px;
   height: 35px;
   width: 300px;
-  background: #e63c3c;
+  background: rgb(230, 60, 60);
   z-index: 15;
 }
-.life p {
+.lifePoints.__mobile {
+  top: 60px;
+  height: 20px;
+  width: 200px;
+}
+.lifePoints p {
   -webkit-transition: 0.5s;
   transition: 0.5s;
   height: 100%;
   width: 100%;
-  background: #6eeb6e;
-  -webkit-box-shadow: 0 0 20px 4px #2fd32f inset;
-          box-shadow: 0 0 20px 4px #2fd32f inset;
+  background: rgb(110, 235, 110);
+  -webkit-box-shadow: 0 0 20px 4px rgb(47, 211, 47) inset;
+          box-shadow: 0 0 20px 4px rgb(47, 211, 47) inset;
 }
-.life span {
+.lifePoints span {
   position: absolute;
   z-index: -1;
   top: 0;
@@ -134,7 +150,7 @@ body {
   transition: 0.7s;
   height: 100%;
   width: 100%;
-  background: #e2df14;
+  background: rgb(226, 223, 20);
 }
 
 .mapContainer {
@@ -172,7 +188,7 @@ body {
   right: 50px;
   overflow: hidden;
   z-index: 5;
-  background: #00aa00;
+  background: rgb(0, 170, 0);
   border: 2px solid gray;
 }
 .large_map .soldierPoint, .large_map .bumblebeePoint, .large_map .greenBeetlePoint, .large_map .waspPoint, .large_map .antPoint {
@@ -194,7 +210,7 @@ body {
   border-radius: 25%;
   -webkit-transform: translate(-71px, -71px);
           transform: translate(-71px, -71px);
-  border: 2px solid #00be00;
+  border: 2px solid rgb(0, 190, 0);
 }
 .large_map.show {
   display: block;
@@ -210,7 +226,7 @@ body {
 }
 
 .greenBeetlePoint {
-  background-color: #48ff48;
+  background-color: rgb(72, 255, 72);
   border: 1px solid blue;
 }
 
@@ -220,8 +236,8 @@ body {
 }
 
 .soldierPoint {
-  background-color: red;
-  border: 2px solid black;
+  background-color: rgb(255, 0, 0);
+  border: 2px solid rgb(0, 0, 0);
 }
 
 .bumblebeeSoil {
@@ -273,6 +289,57 @@ body {
 .stone-1 {
   bottom: 25px;
   right: 50px;
+}
+
+.buttons {
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  z-index: 15;
+}
+.buttons button {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  opacity: 0.6;
+  background: url(/img/buttonArrow.png) 100%/cover no-repeat;
+}
+.buttons button:hover {
+  opacity: 0.8;
+}
+.buttons .btn-up {
+  bottom: 10rem;
+  left: 5rem;
+  border-radius: 10px 10px 0 0;
+  -webkit-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+.buttons .btn-right {
+  bottom: 5rem;
+  left: 10rem;
+  border-radius: 0 10px 10px 0;
+}
+.buttons .btn-down {
+  bottom: 0rem;
+  left: 5rem;
+  border-radius: 0 0 10px 10px;
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.buttons .btn-left {
+  bottom: 5rem;
+  left: 0;
+  border-radius: 10px 0 0 10px;
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.buttons .btn-space {
+  bottom: 5rem;
+  left: 5rem;
+  border-radius: 50%;
+  background-color: black;
 }
 
 /*--------------------*/

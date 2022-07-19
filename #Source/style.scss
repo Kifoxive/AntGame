@@ -6,6 +6,10 @@
   border: 0;
 }
 
+:root {
+  font-size: 62.5%;
+}
+
 *,
 *:before,
 *:after {
@@ -103,6 +107,13 @@ body {
   top: 40px;
   left: 150px;
   z-index: 15;
+  &.__mobile {
+    top: 20px;
+    left: 130px;
+    & p {
+      font-size: 20px;
+    }
+  }
   p {
     font-size: 30px;
     text-transform: uppercase;
@@ -110,7 +121,7 @@ body {
   }
 }
 
-.life {
+.lifePoints {
   position: fixed;
   top: 80px;
   left: 70px;
@@ -118,6 +129,11 @@ body {
   width: 300px;
   background: rgb(230, 60, 60);
   z-index: 15;
+  &.__mobile {
+    top: 60px;
+    height: 20px;
+    width: 200px;
+  }
   & p {
     transition: 0.5s;
     height: 100%;
@@ -284,6 +300,54 @@ body {
   right: 50px;
 }
 
+.buttons {
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  z-index: 15;
+  & button {
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    opacity: 0.6;
+    background: url(/img/buttonArrow.png) 100% / cover no-repeat;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  & .btn-up {
+    bottom: 10rem;
+    left: 5rem;
+    border-radius: 10px 10px 0 0;
+    transform: rotate(-90deg);
+  }
+  & .btn-right {
+    bottom: 5rem;
+    left: 10rem;
+    border-radius: 0 10px 10px 0;
+  }
+  & .btn-down {
+    bottom: 0rem;
+    left: 5rem;
+    border-radius: 0 0 10px 10px;
+    transform: rotate(90deg);
+  }
+  & .btn-left {
+    bottom: 5rem;
+    left: 0;
+    border-radius: 10px 0 0 10px;
+    transform: rotate(180deg);
+  }
+  & .btn-space {
+    bottom: 5rem;
+    left: 5rem;
+    border-radius: 50%;
+    background-color: black;
+  }
+}
+
 /*--------------------*/
 
 // container
@@ -299,6 +363,9 @@ $width: 4000px;
   height: $height;
   width: $width;
   transition: 0.5s;
+
+  &.__mobile {
+  }
 
   // bioms
   & .tallGrass {
