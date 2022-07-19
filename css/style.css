@@ -304,7 +304,7 @@ body {
   height: 50px;
   width: 50px;
   opacity: 0.6;
-  background: url(/img/buttonArrow.png) 100%/cover no-repeat;
+  background: url(../img/buttonArrow.png) 100%/cover no-repeat;
 }
 .buttons button:hover {
   opacity: 0.8;
